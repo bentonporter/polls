@@ -1,5 +1,6 @@
 package com.bazaarvoice.polls.resource;
 
+import com.bazaarvoice.polls.core.Poll;
 import lombok.Data;
 
 import javax.ws.rs.GET;
@@ -12,10 +13,19 @@ import javax.ws.rs.PathParam;
 public class PollsResource {
 
     @POST
-    // this works with: http://localhost:4000/polls/prod001
-    @Path("/{productId}")
-    public String getPolls(@PathParam("productId") String productId) {
-        return "hello world! For product: " + productId;
+    public String getPolls(Poll poll) {
+        if (poll == null) {
+            return "hello world! For NO PRODUCT ";
+        }
+        String productId = poll.getProductId();
+        String questionText = poll.getQuestionText();
+
+        String retString = "Create poll for: \n" +
+                " productId: " + productId + "\n" +
+                " questionText: " + questionText;
+
+        return retString;
+
     }
 
     @GET

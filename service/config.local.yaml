@@ -1,6 +1,11 @@
-http:
-  port: 4000
-  adminPort: 4001
+server:
+  applicationConnectors:
+    - type: http
+      port: 4000
+
+  adminConnectors:
+    - type: http
+      port: 4001
 
 database:
   # the name of your JDBC driver
@@ -13,7 +18,7 @@ database:
   password: voC7oj2D
 
   # the JDBC URL
-  url: jdbc:mysql://hackathon.cudqte3kvjgc.us-east-1.rds.amazonaws.com:3306
+  url: jdbc:mysql://hackathon.cudqte3kvjgc.us-east-1.rds.amazonaws.com:3306/hackathon
 
   # any properties specific to your JDBC driver:
 #  properties:

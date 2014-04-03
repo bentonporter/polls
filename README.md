@@ -18,7 +18,7 @@ Running locally
 
         * Install the Lombok plugin in IntelliJ.
         * Create a run configuration with:
-          * Main Class:  com.bazaarvoice.polls.PollsService
+          * Main Class:  com.bazaarvoice.polls.PollsApplication
           * Program Arguments:  server config.local.yaml
           * Working Directory: $MODULE_DIR$
           * Use classpath of module:  service
@@ -27,3 +27,11 @@ Running locally
 
         $ cd service
         $ java -jar target/service-*.jar server config.local.yaml
+
+One time thing
+--------------
+
+Create the DB table:
+
+        $ cd service
+        $ java -jar target/service-*.jar db migrate config.local.yaml

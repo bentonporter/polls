@@ -28,10 +28,18 @@ Running locally
         $ cd service
         $ java -jar target/service-*.jar server config.local.yaml
 
-One time thing
---------------
+Database
+--------
 
-Create the DB table:
+To connect to the database:
+
+- host: hackathon.cudqte3kvjgc.us-east-1.rds.amazonaws.com
+- username: admin
+- password: voC7oj2D
+- port: 3306
+
+
+If the database does not yet exist, here's how to create it:
 
         $ cd service
         $ java -jar target/service-*.jar db migrate config.local.yaml

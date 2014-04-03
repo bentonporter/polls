@@ -26,20 +26,45 @@ public class PollsResource {
     public long createPoll(Poll poll) {
         Preconditions.checkNotNull(poll);
         log.debug("Creating poll: " + poll.toString());
-        return pollDAO.create(poll);
+        return pollDAO.save(poll);
     }
 
     @GET
     @Path("/{pollId}")
     @UnitOfWork
-    public Poll getPollbyId(@PathParam("pollId") Long pollId) {
+    public Poll getPoll(@PathParam("pollId") Long pollId) {
         return pollDAO.findById(pollId);
+    }
+
+    @GET
+    @Path("/{pollId}/{yesOrNo}")
+    @UnitOfWork
+    public void vote(@PathParam("pollId") Long pollId, @PathParam("yesOrNo") String vote) {
+        // Find the poll entity
+        Poll poll = pollDAO.findById(pollId);
+        Preconditions.checkNotNull(poll);               // TODO could make this a 404
+
+        // Update its count
+        if ("yes".equalsIgnoreCase(vote)) {
+            int count = poll.getYesCount();
+            poll.setYesCount(++count);
+
+        } else if ("no".equalsIgnoreCase(vote)) {
+            int count = poll.getNoCount();
+            poll.setNoCount(++count);
+
+        } else {
+            throw new IllegalArgumentException("Invalid vote value: " + vote);
+        }
+
+        // And save it
+        pollDAO.save(poll);
     }
 
     @GET
     @Path("/product/{productId}")
     @UnitOfWork
-    public Poll getPollsByProduct(@PathParam("productId") String productId) {
+    public Poll getPollsForProduct(@PathParam("productId") String productId) {
         return null;
 //        return pollDAO.findByProductId(productId);
     }

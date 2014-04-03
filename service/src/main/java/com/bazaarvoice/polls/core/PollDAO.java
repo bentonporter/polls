@@ -15,7 +15,7 @@ public class PollDAO extends AbstractDAO<Poll> {
         return get(id);
     }
 
-    public long create(Poll poll) {
+    public long save(Poll poll) {
         return persist(poll).getId();
     }
 

@@ -4,8 +4,8 @@ Polls
 API for managing polls for hackathon project.
 
 
-API
----
+API Documentation
+-----------------
 
 #### Create a poll
 
@@ -52,8 +52,8 @@ GET /polls/product/{productId}
 ```
 
 
-Development
------------
+Developing
+----------
 
 #### Running locally
 

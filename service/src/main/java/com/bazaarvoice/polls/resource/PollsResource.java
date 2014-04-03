@@ -7,6 +7,8 @@ import io.dropwizard.hibernate.UnitOfWork;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -64,8 +66,8 @@ public class PollsResource {
     @GET
     @Path("/product/{productId}")
     @UnitOfWork
-    public Poll getPollsForProduct(@PathParam("productId") String productId) {
-        return null;
-//        return pollDAO.findByProductId(productId);
+    // API endpoint for polls by productid
+    public List<Poll> getPollsByProduct(@PathParam("productId") String productId) {
+        return pollDAO.findByProduct(productId);
     }
 }

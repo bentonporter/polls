@@ -19,11 +19,8 @@ public class PollDAO extends AbstractDAO<Poll> {
         return persist(poll).getId();
     }
 
-    public List<Poll> findAll() {
-        return list(namedQuery("com.bazaarvoice.polls.data.Poll.findAll"));
+    public List<Poll> findByProduct(String productId) {
+        return list(namedQuery("com.bazaarvoice.polls.core.Poll.findByProduct").setParameter("productId", productId));
     }
 
-//    public Poll findByProductId(String productId) {
-//        throw new IllegalStateException("this needs to be implemented");
-//    }
 }

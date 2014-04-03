@@ -18,6 +18,10 @@ import javax.persistence.Table;
         @NamedQuery(
                 name = "com.bazaarvoice.polls.core.Poll.findAll",
                 query = "SELECT p FROM Poll p"
+        ),
+        @NamedQuery(
+            name = "com.bazaarvoice.polls.core.Poll.findByProduct",
+            query = "SELECT p FROM Poll p WHERE p.productId = :productId"
         )
 })
 public class Poll {

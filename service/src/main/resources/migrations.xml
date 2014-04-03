@@ -21,4 +21,12 @@
             <column name="noCount" type="int"/>
         </createTable>
     </changeSet>
+
+    <changeSet id="2" author="hackathon-team">
+        <createIndex tableName="poll"
+                     indexName="poll-productId"
+                     unique="false">
+            <column name="productId"/>
+        </createIndex>
+    </changeSet>
 </databaseChangeLog>

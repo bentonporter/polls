@@ -29,14 +29,14 @@ This call will return the ID of the new Poll.
 You can vote "yes" or "no" on a poll as follows, specifying the poll ID that was returned
 when you created the poll.
 
-Vote Yes:
+To vote "yes":
 ```
-POST /polls/{pollId}/yes
+GET /polls/{pollId}/yes
 ```
 
-Vote No:
+To vote "no":
 ```
-POST /polls/{pollId}/no
+GET /polls/{pollId}/no
 ```
 
 #### Get a poll

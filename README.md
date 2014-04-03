@@ -44,3 +44,52 @@ If the database does not yet exist, here's how to create it:
 
     $ cd service
     $ java -jar target/service-*.jar db migrate config.local.yaml
+
+
+API Docs
+--------
+
+#### Create a poll
+
+```
+POST /polls
+```
+
+And send the Poll that you want to create as JSON in the request body:
+
+```
+{
+  "productId": "prod001",
+  "questionText": "Should I buy this product?"
+}
+```
+
+This call will return the ID of the new Poll.
+
+#### Vote on a poll
+
+You can vote "yes" or "no" on a poll as follows, specifying the poll ID that was returned
+when you created the poll.
+
+To vote yes:
+```
+POST /polls/{pollId}/yes
+```
+
+To vote no:
+```
+POST /polls/{pollId}/no
+```
+
+#### Get a poll
+
+```
+GET /polls/{pollId}
+```
+
+#### Get all polls for a given product
+
+```
+GET /polls/product/{productId}
+```
+

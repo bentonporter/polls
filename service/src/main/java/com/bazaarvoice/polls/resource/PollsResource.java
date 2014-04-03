@@ -1,15 +1,15 @@
 package com.bazaarvoice.polls.resource;
 
+import lombok.Data;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
+@Data
 @Path("/polls")
 public class PollsResource {
-
-    public PollsResource() {
-    }
 
     @POST
     // this works with: http://localhost:4000/polls/prod001
@@ -29,5 +29,4 @@ public class PollsResource {
     public String getPollsByProduct() {
         return "hello world by ProductId!";
     }
-
 }

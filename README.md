@@ -4,8 +4,8 @@ Polls
 API for managing polls for hackathon project.
 
 
-API Docs
---------
+API
+---
 
 #### Create a poll
 
@@ -52,8 +52,10 @@ GET /polls/product/{productId}
 ```
 
 
-Running locally
----------------
+Development
+-----------
+
+#### Running locally
 
 1.  Get and build the code
 
@@ -78,8 +80,7 @@ Running locally
         $ java -jar target/service-*.jar server config.local.yaml
 
 
-Database
---------
+#### Database
 
 To connect to the database:
 

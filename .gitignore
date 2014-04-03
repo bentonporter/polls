@@ -1,0 +1,13 @@
+target
+.idea
+.DS_Store
+*.iml
+*.ipr
+*.iws
+*.class
+*.pyc
+
+# Package Files #
+*.jar
+*.war
+*.ear

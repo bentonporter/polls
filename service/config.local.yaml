@@ -1,0 +1,3 @@
+http:
+  port: 4000
+  adminPort: 4001

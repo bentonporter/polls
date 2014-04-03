@@ -28,6 +28,7 @@ Running locally
         $ cd service
         $ java -jar target/service-*.jar server config.local.yaml
 
+
 Database
 --------
 
@@ -37,9 +38,9 @@ To connect to the database:
 - username: admin
 - password: voC7oj2D
 - port: 3306
-
+- database: hackathon
 
 If the database does not yet exist, here's how to create it:
 
-        $ cd service
-        $ java -jar target/service-*.jar db migrate config.local.yaml
+    $ cd service
+    $ java -jar target/service-*.jar db migrate config.local.yaml

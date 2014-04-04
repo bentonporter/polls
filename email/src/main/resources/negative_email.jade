@@ -1,12 +1,19 @@
 !!! 5
 html
     body
-        h1 Your social poll for #{product} has closed!
-        p
-            | The results are
-            strong negative!
+        h2 Your poll results are in!
+        p Your poll for #{product} is finished.
+        h3 Your friends say you shouldn't buy it.
+        p Here are some product recommendations you could consider instead:
+        ul
+            for rec in recs
+                li
+                    a(href='#{rec.url}')= rec.name
+        p ...or
+            a(href='#{product_url}') go back to #{vendor} and buy #{product}!
         p
             | Thanks,
             br
             | Social Polling Team
+
 

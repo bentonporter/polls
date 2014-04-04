@@ -85,7 +85,7 @@ public class PollsResource {
 
     private void setHeaders(HttpServletResponse response) {
         response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Headers", "x-requested-with");
+        response.addHeader("Access-Control-Allow-Headers", "content-type, accept, x-requested-with");
         response.addHeader("Access-Control-Allow-Methods", "POST, OPTIONS, GET");
     }
 }

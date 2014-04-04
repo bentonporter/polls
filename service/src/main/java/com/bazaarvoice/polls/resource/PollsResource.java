@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
+import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -23,6 +24,11 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class PollsResource {
     private final PollDAO pollDAO;
+
+    @OPTIONS
+    public void something(@Context HttpServletResponse response) {
+        setHeaders(response);
+    }
 
     @POST
     @UnitOfWork

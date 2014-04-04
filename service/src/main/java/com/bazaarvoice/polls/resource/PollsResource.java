@@ -7,14 +7,15 @@ import io.dropwizard.hibernate.UnitOfWork;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @Slf4j
 @Data
@@ -25,7 +26,8 @@ public class PollsResource {
 
     @POST
     @UnitOfWork
-    public long createPoll(Poll poll) {
+    public long createPoll(Poll poll, @Context HttpServletResponse response) {
+        setHeaders(response);
         Preconditions.checkNotNull(poll);
         log.debug("Creating poll: " + poll.toString());
         return pollDAO.save(poll);
@@ -34,14 +36,17 @@ public class PollsResource {
     @GET
     @Path("/{pollId}")
     @UnitOfWork
-    public Poll getPoll(@PathParam("pollId") Long pollId) {
+    public Poll getPoll(@PathParam("pollId") Long pollId, @Context HttpServletResponse response) {
+        setHeaders(response);
         return pollDAO.findById(pollId);
     }
 
     @GET
     @Path("/{pollId}/{yesOrNo}")
     @UnitOfWork
-    public void vote(@PathParam("pollId") Long pollId, @PathParam("yesOrNo") String vote) {
+    public void vote(@PathParam("pollId") Long pollId, @PathParam("yesOrNo") String vote, @Context HttpServletResponse response) {
+        setHeaders(response);
+
         // Find the poll entity
         Poll poll = pollDAO.findById(pollId);
         Preconditions.checkNotNull(poll);               // TODO could make this a 404
@@ -67,7 +72,13 @@ public class PollsResource {
     @Path("/product/{productId}")
     @UnitOfWork
     // API endpoint for polls by productid
-    public List<Poll> getPollsByProduct(@PathParam("productId") String productId) {
+    public List<Poll> getPollsByProduct(@PathParam("productId") String productId, @Context HttpServletResponse response) {
+        setHeaders(response);
         return pollDAO.findByProduct(productId);
+    }
+
+    private void setHeaders(HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "*");
     }
 }

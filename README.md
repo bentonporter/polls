@@ -94,3 +94,15 @@ If the database does not yet exist, here's how to create it:
 
     $ cd service
     $ java -jar target/service-*.jar db migrate config.local.yaml
+
+
+Misc
+----
+
+- Gmail info:
+    - pollHackathon@gmail.com
+    - JukNimp3
+
+- Facebook info:
+    - bazaarvoicefb@facebook.com
+    - JukNimp3

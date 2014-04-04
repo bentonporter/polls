@@ -15,6 +15,9 @@ import lombok.extern.java.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 @Log
@@ -23,6 +26,7 @@ public class PollResultEmailSenderService {
     private final EmailTemplateRenderingService _renderingService;
     private final static String FROM_EMAIL = "no-reply@hackathon.ts.bazaarvoice.com";
     private static final String AWS_CREDENTIAL_FILENAME = "aws-keys.properties";
+    private static final String SUBJECT_LINE = "Your poll results are in!";
 
     public PollResultEmailSenderService()
             throws IOException {
@@ -67,19 +71,33 @@ public class PollResultEmailSenderService {
         log.info("Sending email to " + recipient);
         String content = _renderingService.render(EmailTemplateRenderingService.Template.POSITIVE, model);
         log.info(content);
-        // sendEmail(recipient, "Your poll has completed!", content, true);
+        sendEmail(recipient, SUBJECT_LINE, content, true);
     }
 
     public void sendNegativeEmail(String recipient, Map<String, Object> model) {
         log.info("Sending email to " + recipient);
-        log.info(_renderingService.render(EmailTemplateRenderingService.Template.NEGATIVE, model));
+        String content = _renderingService.render(EmailTemplateRenderingService.Template.NEGATIVE, model);
+        sendEmail(recipient, SUBJECT_LINE, content, true);
     }
 
     public static void main(String[] args)
             throws IOException {
         PollResultEmailSenderService service = new PollResultEmailSenderService();
 
-        service.sendPositiveEmail("jeremy.shoemaker@bazaarvoice.com", ImmutableMap.<String, Object>of("product", "Titanfall for Xbox 360"));
-        service.sendNegativeEmail("jeremy.shoemaker@bazaarvoice.com", ImmutableMap.<String, Object>of("product", "Titanfall for Xbox 360"));
+        Map<String, Object> positiveModel = new HashMap<String, Object>();
+        positiveModel.put("product", "Titanfall for Xbox 360");
+        positiveModel.put("vendor", "BestBuy");
+        positiveModel.put("product_url", "http://example.com/product-link");
+        service.sendPositiveEmail("jeremy.shoemaker@bazaarvoice.com", positiveModel);
+
+        Map<String, Object> negativeModel = new HashMap<String, Object>();
+        negativeModel.put("product", "Titanfall for Xbox 360");
+        negativeModel.put("vendor", "BestBuy");
+        negativeModel.put("product_url", "http://example.com/product-link");
+        List<Map<String, Object>> recommendations = new LinkedList<Map<String, Object>>();
+        recommendations.add(ImmutableMap.<String, Object>of("name", "Call of Duty: Ghosts", "url", "http://example.com/call-of-duty-ghosts"));
+        recommendations.add(ImmutableMap.<String, Object>of("name", "Dust 514", "url", "http://example.com/dust-514"));
+        negativeModel.put("recs", recommendations);
+        service.sendNegativeEmail("jeremy.shoemaker@bazaarvoice.com", negativeModel);
     }
 }

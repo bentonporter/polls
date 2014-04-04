@@ -1,10 +1,11 @@
 !!! 5
 html
     body
-        h1 Your social poll for #{product} has closed!
+        h2 Your poll results are in!
+        p Your poll for #{product} is finished.
+        h3 Looks like your friends think you should buy it!
         p
-            | The results are
-            strong positive!
+            a(href='#{product_url}') Go back to #{vendor} and buy it!
         p
             | Thanks,
             br

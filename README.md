@@ -100,9 +100,11 @@ Misc
 ----
 
 - Gmail info:
+    - www.gmail.com
     - pollHackathon@gmail.com
     - JukNimp3
 
 - Facebook info:
+    - www.facebook.com
     - bazaarvoicefb@facebook.com
     - JukNimp3

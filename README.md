@@ -110,4 +110,4 @@ Misc
     - JukNimp3
 
 - Product page:
-    - hackathon.ts.bazaarvoice.com/demo
+    - http://hackathon.ts.bazaarvoice.com/demo

@@ -1,7 +1,9 @@
 Polls
 =====
 
-API for managing polls for hackathon project.
+API for managing polls for our BV.IO hackathon project.
+
+(This is also a good sample Dropwizard application.)
 
 
 API Documentation
@@ -31,12 +33,12 @@ when you created the poll.
 
 To vote "yes":
 ```
-GET /polls/{pollId}/yes
+POST /polls/{pollId}/yes
 ```
 
 To vote "no":
 ```
-GET /polls/{pollId}/no
+POST /polls/{pollId}/no
 ```
 
 #### Get a poll
@@ -82,6 +84,10 @@ Developing
 
 #### Database
 
+*Note: This RDS instance no longer exists, because it was up just for the hackathon. To run the app, you
+just create a new database and update `config.local.yaml` to connect to it. The following is old info, but
+I'll leave it here just for reference.*
+
 To connect to the database:
 
 - host: hackathon.cudqte3kvjgc.us-east-1.rds.amazonaws.com
@@ -94,20 +100,3 @@ If the database does not yet exist, here's how to create it:
 
     $ cd service
     $ java -jar target/service-*.jar db migrate config.local.yaml
-
-
-Misc
-----
-
-- Gmail info:
-    - www.gmail.com
-    - pollHackathon@gmail.com
-    - JukNimp3
-
-- Facebook info:
-    - www.facebook.com
-    - bazaarvoicefb@facebook.com
-    - JukNimp3
-
-- Product page:
-    - http://hackathon.ts.bazaarvoice.com/demo

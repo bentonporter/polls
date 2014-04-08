@@ -1,8 +1,8 @@
 package com.bazaarvoice.polls;
 
 import com.bazaarvoice.polls.config.PollsConfiguration;
-import com.bazaarvoice.polls.core.Poll;
-import com.bazaarvoice.polls.core.PollDAO;
+import com.bazaarvoice.polls.data.Poll;
+import com.bazaarvoice.polls.data.PollDAO;
 import com.bazaarvoice.polls.resource.PollsResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;

@@ -1,22 +1,20 @@
 package com.bazaarvoice.polls.resource;
 
-import com.bazaarvoice.polls.core.Poll;
-import com.bazaarvoice.polls.core.PollDAO;
-import com.google.common.base.Preconditions;
+import com.bazaarvoice.polls.data.Poll;
+import com.bazaarvoice.polls.data.PollDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
-import javax.ws.rs.OPTIONS;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Slf4j
 @Data
@@ -25,16 +23,10 @@ import java.util.List;
 public class PollsResource {
     private final PollDAO pollDAO;
 
-    @OPTIONS
-    public void something(@Context HttpServletResponse response) {
-        setHeaders(response);
-    }
-
     @POST
     @UnitOfWork
-    public long createPoll(Poll poll, @Context HttpServletResponse response) {
-        setHeaders(response);
-        Preconditions.checkNotNull(poll);
+    public long createPoll(Poll poll) {
+        checkNotNull(poll);
         log.debug("Creating poll: " + poll.toString());
         return pollDAO.save(poll);
     }
@@ -42,20 +34,17 @@ public class PollsResource {
     @GET
     @Path("/{pollId}")
     @UnitOfWork
-    public Poll getPoll(@PathParam("pollId") Long pollId, @Context HttpServletResponse response) {
-        setHeaders(response);
+    public Poll getPoll(@PathParam("pollId") Long pollId) {
         return pollDAO.findById(pollId);
     }
 
-    @GET
+    @POST
     @Path("/{pollId}/{yesOrNo}")
     @UnitOfWork
-    public void vote(@PathParam("pollId") Long pollId, @PathParam("yesOrNo") String vote, @Context HttpServletResponse response) {
-        setHeaders(response);
-
+    public void voteOnPoll(@PathParam("pollId") Long pollId, @PathParam("yesOrNo") String vote) {
         // Find the poll entity
         Poll poll = pollDAO.findById(pollId);
-        Preconditions.checkNotNull(poll);               // TODO could make this a 404
+        checkNotNull(poll);
 
         // Update its count
         if ("yes".equalsIgnoreCase(vote)) {
@@ -70,22 +59,14 @@ public class PollsResource {
             throw new IllegalArgumentException("Invalid vote value: " + vote);
         }
 
-        // And save it
+        // And save the updated poll
         pollDAO.save(poll);
     }
 
     @GET
     @Path("/product/{productId}")
     @UnitOfWork
-    // API endpoint for polls by productid
-    public List<Poll> getPollsByProduct(@PathParam("productId") String productId, @Context HttpServletResponse response) {
-        setHeaders(response);
+    public List<Poll> getAllPollsForProduct(@PathParam("productId") String productId) {
         return pollDAO.findByProduct(productId);
-    }
-
-    private void setHeaders(HttpServletResponse response) {
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Headers", "content-type, accept, x-requested-with");
-        response.addHeader("Access-Control-Allow-Methods", "POST, OPTIONS, GET");
     }
 }

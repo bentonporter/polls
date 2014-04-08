@@ -1,4 +1,4 @@
-package com.bazaarvoice.polls.core;
+package com.bazaarvoice.polls.data;
 
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;

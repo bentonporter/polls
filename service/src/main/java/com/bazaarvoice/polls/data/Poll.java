@@ -1,4 +1,4 @@
-package com.bazaarvoice.polls.core;
+package com.bazaarvoice.polls.data;
 
 import lombok.Data;
 

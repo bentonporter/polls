@@ -3,7 +3,7 @@ Polls
 
 API for managing polls for our BV.IO hackathon project.
 
-(This is also a good sample Dropwizard application.)
+(This is also a good sample [Dropwizard](https://dropwizard.github.io/dropwizard/) application.)
 
 
 API Documentation
@@ -84,8 +84,8 @@ Developing
 
 #### Database
 
-*Note: This RDS instance no longer exists, because it was up just for the hackathon. To run the app, you
-just create a new database and update `config.local.yaml` to connect to it. The following is old info, but
+*Note: This RDS instance no longer exists, because it was up just for the hackathon. To run the app, just
+create a new database and update `config.local.yaml` to connect to it. The following is old info, but
 I'll leave it here just for reference.*
 
 To connect to the database:
